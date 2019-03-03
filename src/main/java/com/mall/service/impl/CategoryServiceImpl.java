@@ -67,7 +67,7 @@ public class CategoryServiceImpl implements ICategoryService {
     }
 
     public ServerResponse selectCategoryAndChildrenById(Integer categoryId) {
-        //初始化
+        //初始化,用到Guava本地缓存
         Set<Category> categorySet = Sets.newHashSet();
         findChildCategory(categorySet, categoryId);
 
@@ -86,7 +86,7 @@ public class CategoryServiceImpl implements ICategoryService {
      * @param categoryId
      * @return
      */
-    private Set<Category> findChildCategory(Set<Category> categorySet, Integer categoryId) {
+    private void findChildCategory(Set<Category> categorySet, Integer categoryId) {
         Category category = categoryMapper.selectByPrimaryKey(categoryId);
         if (category != null) {
             categorySet.add(category);
@@ -96,6 +96,5 @@ public class CategoryServiceImpl implements ICategoryService {
         for (Category categoryItem : categoryList) {
             findChildCategory(categorySet, categoryItem.getId());
         }
-        return categorySet;
     }
 }
