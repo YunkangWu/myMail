@@ -34,7 +34,7 @@
                 #{quantity,jdbcType=INTEGER},
                 #{checked,jdbcType=INTEGER},
                 #{createTime,jdbcType=TIMESTAMP},
-                now())
+                #{updateTime,jdbcType=TIMESTAMP})
     </insert>
     <insert id="insertSelective" parameterType="com.mall.pojo.Cart">
         insert into mmall_cart
@@ -142,10 +142,11 @@
           and user_id = #{userId};
     </select>
 
-    <delete id="deleteByUserIdProducts" parameterType="map">
+    <delete id="deleteByUserIdProductIds" parameterType="map">
         delete from mmall_cart
         where user_id = #{userId}
         <if test="productIdList != null">
+            and product_id in
             <foreach collection="productIdList" item="item" index="index" open="(" separator="," close=")">
                 #{item}
             </foreach>
@@ -162,7 +163,7 @@
         </if>
     </update>
 
-    <select id="selectCartProductCount">
+    <select id="selectCartProductCount" parameterType="int" resultType="int">
         select ifnull(sum(quantity), 0) as count
         from mmall_cart
         where user_id = #{userId}
