@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <property name="LOG_HOME" value="${CATALINA_HOME}/logs"></property>
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoding>UTF-8</encoding>
         <encoder>
@@ -10,11 +11,11 @@
         </filter>
     </appender>
 
-    <appender name="mall" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <!--<File>d:/malllog/mall.log</File>-->
-        <File>D:/Log/mall/mall.log</File>
+    <appender name="mmall" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--<File>d:/mmalllog/mmall.log</File>-->
+        <File>${LOG_HOME}/mmall.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>D:/Log/mall/mall.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <fileNamePattern>${LOG_HOME}/mmall.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
             <append>true</append>
             <maxHistory>10</maxHistory>
         </rollingPolicy>
@@ -25,11 +26,11 @@
 
 
     <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <!--<File>d:/malllog/error.log</File>-->
-        <File>D:/Log/mall/error.log</File>
+        <!--<File>d:/mmalllog/error.log</File>-->
+        <File>${LOG_HOME}/error.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>D:/Log/mall/error.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
-            <!--<fileNamePattern>d:/malllog/error.log.%d{yyyy-MM-dd}.gz</fileNamePattern>-->
+            <fileNamePattern>${LOG_HOME}/error.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <!--<fileNamePattern>d:/mmalllog/error.log.%d{yyyy-MM-dd}.gz</fileNamePattern>-->
             <append>true</append>
             <maxHistory>10</maxHistory>
         </rollingPolicy>
@@ -43,15 +44,17 @@
         </filter>
     </appender>
 
-    <logger name="com.mall" additivity="false" level="INFO">
-        <appender-ref ref="mall"/>
+    <logger name="com.mmall" additivity="false" level="INFO" >
+        <appender-ref ref="mmall" />
         <appender-ref ref="console"/>
+        <appender-ref ref="error"/>
     </logger>
+
 
 
     <!-- geelynote mybatis log 日志 -->
 
-    <logger name="com.mall.dao" level="DEBUG"/>
+    <logger name="com.mmall.dao" level="DEBUG"/>
 
     <!--<logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate" level="DEBUG" >-->
     <!--<appender-ref ref="console"/>-->
