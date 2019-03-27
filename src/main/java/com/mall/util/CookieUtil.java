@@ -8,12 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Created by Yunkang Wu
+ * 集群实现单点登录
+ * 1、先把第一次登录request的cookie token（JSESSIONID）赋值给新的cookie_name返回给浏览器
+ * 2、向浏览器add新的cookie之后，将key-value格式的token-obj存到redis中
+ * 3、浏览器下次请求验证登录，轮询cookies验证是否有赋值的cookie
+ * 4、若存在，通过该token去redis中get value得到登录对象obj；若不存在，则判断未登录
+ * 5、登出时，先从request中拿到token，再删除浏览器cookie，删除redis中该键值对
  */
 @Slf4j
 public class CookieUtil {
 
-    private final static String COOKIE_DOMAIN = ".mall.com";
+    private final static String COOKIE_DOMAIN = "localhost";//cookie add的域名 例如.mall.com
     private final static String COOKIE_NAME = "mall_login_token";
 
     /**
@@ -46,7 +51,7 @@ public class CookieUtil {
         Cookie ck = new Cookie(COOKIE_NAME, token);
         ck.setDomain(COOKIE_DOMAIN);
         ck.setPath("/");//代表在根目录
-
+        ck.setHttpOnly(true);//不允许通过脚本访问cookie，一定程度防止脚本攻击
         //如果这个maxage不设置的话，cookie不会写入硬盘，写在内存，只在当前页面有效
         ck.setMaxAge(60 * 60 * 24 * 365);
         log.info("write cookeName:{} cookeValue:{}", ck.getName(), ck.getValue());
