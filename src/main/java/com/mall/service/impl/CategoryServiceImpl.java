@@ -59,7 +59,7 @@ public class CategoryServiceImpl implements ICategoryService {
     public ServerResponse<List<Category>> getChildrenParallelCategory(Integer categoryId) {
         List<Category> categoryList = categoryMapper.selectCategoryChildrenByParentId(categoryId);
         if (CollectionUtils.isEmpty(categoryList)) {
-            log.info("未找到当前分类"+categoryId+"的子分类");
+            log.info("未找到当前分类" + categoryId + "的子分类");
         }
         return ServerResponse.createBySuccess(categoryList);
     }
@@ -80,6 +80,7 @@ public class CategoryServiceImpl implements ICategoryService {
 
     /**
      * 递归算法，算出子节点
+     *
      * @param categorySet
      * @param categoryId
      * @return

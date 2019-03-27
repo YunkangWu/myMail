@@ -44,12 +44,11 @@
         </filter>
     </appender>
 
-    <logger name="com.mmall" additivity="false" level="INFO" >
-        <appender-ref ref="mmall" />
+    <logger name="com.mmall" additivity="false" level="INFO">
+        <appender-ref ref="mmall"/>
         <appender-ref ref="console"/>
         <appender-ref ref="error"/>
     </logger>
-
 
 
     <!-- geelynote mybatis log 日志 -->

@@ -94,6 +94,7 @@ public class CartController {
 
     /**
      * 全选
+     *
      * @param session
      * @return
      */
@@ -104,11 +105,12 @@ public class CartController {
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
         }
-        return iCartService.selectOrUnSelect(user.getId(), Const.Cart.CHECKED,null);
+        return iCartService.selectOrUnSelect(user.getId(), Const.Cart.CHECKED, null);
     }
 
     /**
      * 全反选
+     *
      * @param session
      * @return
      */
@@ -119,39 +121,41 @@ public class CartController {
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
         }
-        return iCartService.selectOrUnSelect(user.getId(), Const.Cart.UN_CHECKED,null);
+        return iCartService.selectOrUnSelect(user.getId(), Const.Cart.UN_CHECKED, null);
     }
 
     /**
      * 单独选
+     *
      * @param session
      * @param productId
      * @return
      */
     @RequestMapping("select.do")
     @ResponseBody
-    public ServerResponse<CartVo> select(HttpSession session,Integer productId) {
+    public ServerResponse<CartVo> select(HttpSession session, Integer productId) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
         }
-        return iCartService.selectOrUnSelect(user.getId(), Const.Cart.CHECKED,productId);
+        return iCartService.selectOrUnSelect(user.getId(), Const.Cart.CHECKED, productId);
     }
 
     /**
      * 单独反选
+     *
      * @param session
      * @param productId
      * @return
      */
     @RequestMapping("un_select.do")
     @ResponseBody
-    public ServerResponse<CartVo> unSelect(HttpSession session,Integer productId) {
+    public ServerResponse<CartVo> unSelect(HttpSession session, Integer productId) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), ResponseCode.NEED_LOGIN.getDesc());
         }
-        return iCartService.selectOrUnSelect(user.getId(), Const.Cart.UN_CHECKED,productId);
+        return iCartService.selectOrUnSelect(user.getId(), Const.Cart.UN_CHECKED, productId);
     }
 
 

@@ -21,7 +21,7 @@ public class UserMangeController {
     @Autowired
     private IUserService iUserService;
 
-    @RequestMapping(value = "login.do",method = RequestMethod.POST)
+    @RequestMapping(value = "login.do", method = RequestMethod.POST)
     public ServerResponse<User> login(String username, String password, HttpSession session) {
         ServerResponse<User> response = iUserService.login(username, password);
         if (response.isSuccess()) {
@@ -29,7 +29,7 @@ public class UserMangeController {
             if (user.getRole() == Const.Role.ROLE_ADMIN) {
                 session.setAttribute(Const.CURRENT_USER, user);
                 return response;
-            }else {
+            } else {
                 return ServerResponse.createByErrorMessage("不是管理员，无法登录");
             }
         }
