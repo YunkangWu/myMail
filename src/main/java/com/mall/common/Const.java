@@ -18,6 +18,8 @@ public class Const {
         int REDIS_SESSION_TIME = 60 * 30;//30分钟
     }
 
+    public static final String TOKEN_PREFIX = "token_";
+
     public interface ProductListOrderBy {
         Set<String> PRICE_ASC_DESC = Sets.newHashSet("price_desc", "price_asc");
     }
