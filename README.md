@@ -1,2 +1,1 @@
-"# mymall" 
-ssm
+spring+springmvc+mybatis
