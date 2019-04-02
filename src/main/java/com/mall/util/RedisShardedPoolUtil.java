@@ -1,10 +1,8 @@
 package com.mall.util;
 
 import com.mall.common.RedisShardedPool;
-import com.mall.common.RedisShardedPool;
 import lombok.extern.slf4j.Slf4j;
-import redis.clients.ShardedJedis.ShardedJedis;
-import redis.clients.ShardedJedis.ShardedShardedJedis;
+import redis.clients.jedis.ShardedJedis;
 
 /**
  * ShardedJedis api封装
@@ -20,11 +18,11 @@ public class RedisShardedPoolUtil {
      * @return
      */
     public static Long expire(String key, int exTime) {
-        ShardedShardedJedis ShardedJedis = null;
+        ShardedJedis ShardedJedis = null;
         Long result = null;
 
         try {
-            ShardedJedis = RedisShardedPool.getShardedJedis();
+            ShardedJedis = RedisShardedPool.getJedis();
             result = ShardedJedis.expire(key, exTime);
         } catch (Exception e) {
             log.error("expire key:{} error", key, e);
@@ -48,7 +46,7 @@ public class RedisShardedPoolUtil {
         String result = null;
 
         try {
-            ShardedJedis = RedisShardedPool.getShardedJedis();
+            ShardedJedis = RedisShardedPool.getJedis();
             result = ShardedJedis.setex(key, exTime, value);
         } catch (Exception e) {
             log.error("setex key:{} value:{} error", key, value, e);
@@ -64,7 +62,7 @@ public class RedisShardedPoolUtil {
         String result = null;
 
         try {
-            ShardedJedis = RedisShardedPool.getShardedJedis();
+            ShardedJedis = RedisShardedPool.getJedis();
             result = ShardedJedis.set(key, value);
         } catch (Exception e) {
             log.error("set key:{} value:{} error", key, value, e);
@@ -80,7 +78,7 @@ public class RedisShardedPoolUtil {
         String result = null;
 
         try {
-            ShardedJedis = RedisShardedPool.getShardedJedis();
+            ShardedJedis = RedisShardedPool.getJedis();
             result = ShardedJedis.get(key);
         } catch (Exception e) {
             log.error("get key:{} error", key, e);
@@ -96,7 +94,7 @@ public class RedisShardedPoolUtil {
         Long result = null;
 
         try {
-            ShardedJedis = RedisShardedPool.getShardedJedis();
+            ShardedJedis = RedisShardedPool.getJedis();
             result = ShardedJedis.del(key);
         } catch (Exception e) {
             log.error("del key:{} error", key, e);
@@ -108,7 +106,7 @@ public class RedisShardedPoolUtil {
     }
 
     public static void main(String[] args) {
-        ShardedJedis ShardedJedis = RedisShardedPool.getShardedJedis();
+        ShardedJedis ShardedJedis = RedisShardedPool.getJedis();
         RedisShardedPoolUtil.set("keyTest", "value");
         String value = RedisShardedPoolUtil.get("keyTest");
         RedisShardedPoolUtil.setEx("keyex", "valueex", 60 * 10);

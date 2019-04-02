@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * 集群实现单点登录 cookie用来存sessionId
+ * 集群原生实现单点登录 cookie用来存sessionId
  * 1、先把第一次登录request的cookie token（JSESSIONID）赋值给新的cookie_name返回给浏览器
  * 2、向浏览器add新的cookie之后，将key-value格式的token-obj session对象存到redis中
  * 3、浏览器下次请求验证登录，轮询cookies验证是否有赋值的cookie
