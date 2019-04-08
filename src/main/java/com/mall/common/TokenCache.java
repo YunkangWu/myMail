@@ -7,9 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by geely
- */
 @Slf4j
 public class TokenCache {
 
