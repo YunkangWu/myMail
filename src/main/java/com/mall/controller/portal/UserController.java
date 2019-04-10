@@ -43,7 +43,6 @@ public class UserController {
         if (response.isSuccess()) {
             CookieUtil.writeLoginToken(httpServletResponse, session.getId());
             RedisShardedPoolUtil.setEx(session.getId(), JsonUtil.obj2String(response.getData()), Const.RedisCacheExtime.REDIS_SESSION_TIME);
-            session.setAttribute(Const.CURRENT_USER, response.getData());
         }
         return response;
     }

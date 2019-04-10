@@ -95,7 +95,7 @@ public class OrderController {
             log.info("支付宝回调异常", e);
         }
 
-        ServerResponse serverResponse = iOrderService.alipayCallBack(params);
+        ServerResponse serverResponse = iOrderService.aliCallback(params);
         if (serverResponse.isSuccess()) {
             return Const.AlipayCallback.RESPONSE_SUCCESS;
         }
