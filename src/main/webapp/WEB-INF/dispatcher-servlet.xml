@@ -41,6 +41,7 @@
         <property name="defaultEncoding" value="UTF-8"/>
     </bean>
 
+    <!-- springmvc拦截器 -->
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/manage/**"/>

@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 public class CookieUtil {
 
-    private final static String COOKIE_DOMAIN = "localhost";//cookie add的域名 例如.mall.com
+    private final static String COOKIE_DOMAIN = "ltyxxw.site";//cookie add的域名 例如.mall.com
     private final static String COOKIE_NAME = "mall_login_token";
 
     /**
