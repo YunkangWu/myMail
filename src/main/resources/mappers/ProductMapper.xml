@@ -228,4 +228,12 @@
             </foreach>
         </if>
     </select>
+
+    <!--使用悲观锁 for update，必须用主键限定行锁，避免锁住表-->
+    <select id="selectStockByProductId" parameterType="java.lang.Integer" resultType="int">
+        select stock
+        from mmall_product
+        where id = #{id} for
+        update
+    </select>
 </mapper>
