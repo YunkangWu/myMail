@@ -89,6 +89,29 @@ public class RedisShardedPoolUtil {
         return result;
     }
 
+    /**
+     * 锁的key不存在才会执行set
+     *
+     * @param key
+     * @param value
+     * @return
+     */
+    public static Long setnx(String key, String value) {
+        ShardedJedis ShardedJedis = null;
+        Long result;
+
+        try {
+            ShardedJedis = RedisShardedPool.getJedis();
+            result = ShardedJedis.setnx(key, value);
+        } catch (Exception e) {
+            log.error("setnx key:{} value:{} error", key, value, e);
+            RedisShardedPool.returnBrokenResource(ShardedJedis);
+            return null;
+        }
+        RedisShardedPool.returnResource(ShardedJedis);
+        return result;
+    }
+
     public static Long del(String key) {
         ShardedJedis ShardedJedis = null;
         Long result;
