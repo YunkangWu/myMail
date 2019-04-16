@@ -37,7 +37,7 @@ public class AuthorityInterceptor implements HandlerInterceptor {
         String className = handlerMethod.getBean().getClass().getSimpleName();
 
         //解析request参数
-        StringBuffer requestParamerBuffer = new StringBuffer();
+        StringBuilder requestParamerBuffer = new StringBuilder();
         Map paramMap = httpServletRequest.getParameterMap();
         Iterator it = paramMap.entrySet().iterator();
         while (it.hasNext()) {

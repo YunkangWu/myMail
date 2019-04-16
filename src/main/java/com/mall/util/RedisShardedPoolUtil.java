@@ -128,6 +128,29 @@ public class RedisShardedPoolUtil {
         return result;
     }
 
+    /**
+     * getSet 设置新值，立刻拿到返回值
+     * 具有原子性
+     * @param key
+     * @param value
+     * @return
+     */
+    public static String getSet(String key, String value) {
+        ShardedJedis ShardedJedis = null;
+        String result;
+
+        try {
+            ShardedJedis = RedisShardedPool.getJedis();
+            result = ShardedJedis.getSet(key, value);
+        } catch (Exception e) {
+            log.error("getset key:{} value:{} error", key, value, e);
+            RedisShardedPool.returnBrokenResource(ShardedJedis);
+            return null;
+        }
+        RedisShardedPool.returnResource(ShardedJedis);
+        return result;
+    }
+
     public static void main(String[] args) {
         ShardedJedis ShardedJedis = RedisShardedPool.getJedis();
         RedisShardedPoolUtil.set("keyTest", "value");
